@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FEWINFOS</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div class="background"></div>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="#" class="logo">
+                <img src="fewinfos_logo.png" alt="FEWINFOS" class="nav-logo">
+            </a>
+        </div>
+        <div class="nav-toggle" id="navToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-lightbulb"></i> About</a></li>
+            <li><a href="#services"><i class="fas fa-cogs"></i> Services</a></li>
+            <li><a href="#portfolio"><i class="fas fa-code"></i> Products</a></li>
+            <li><a href="#team"><i class="fas fa-users"></i> Team</a></li>
+            <li><a href="#portfolio"><i class="fas fa-rocket"></i> Events</a></li>
+            <li><a href="#contact"><i class="fas fa-paper-plane"></i> Contact</a></li>
+        </ul>
+    </nav>
+    <section class="hero" id="home">
+        <div class="floating-elements">
+            <div class="hex-container">
+                <div class="hexagon"></div>
+                <div class="hexagon"></div>
+                <div class="hexagon"></div>
+                <div class="hexagon"></div>
+                <div class="hexagon"></div>
+                <div class="hexagon"></div>
+            </div>
+        </div>
+        <div class="hero-content">
+            <div class="company-title">
+                <div class="glitch-wrapper">
+                    <div class="glitch" data-text="FEW">FEW</div>
+                    <div class="glitch accent" data-text="INFOS">INFOS</div>
+                </div>
+                <div class="subtitle">Digital Solutions Laboratory</div>
+            </div>
+            <div class="tech-stack">
+                <div class="stack-item" data-text="DESIGN">DESIGN</div>
+                <div class="stack-item" data-text="BUILD">BUILD</div>
+                <div class="stack-item" data-text="SCALE">SCALE</div>
+            </div>
+        </div>
+    </section>
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <h2 class="section-title">About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        <span class="highlight">FEWINFOS</span> is a <span class="accent-text">cutting-edge digital solutions laboratory</span>, specializing in 
+                        <span class="accent-text">innovative software development</span> and technological advancement. Our mission is to transform 
+                        <span class="accent-text">complex challenges</span> into <span class="accent-text">elegant solutions</span>, driving 
+                        <span class="accent-text">digital evolution</span> through creativity and technical excellence.
+                    </p>
+                </div>
+                <div class="about-features">
+                    <div class="feature">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Innovation</h3>
+                        <p>Pushing boundaries with cutting-edge solutions</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-code"></i>
+                        <h3>Technology</h3>
+                        <p>Leveraging latest tech for optimal results</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-lightbulb"></i>
+                        <h3>Creativity</h3>
+                        <p>Innovative solutions for complex challenges</p>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-users"></i>
+                        <h3>Collaboration</h3>
+                        <p>Working together to achieve excellence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="chatbot">
+        <div class="chat-header">
+            <span>FEWINFOS Chat Support</span>
+            <button class="close-chat"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-body">
+            <div class="chat-messages">
+                <div class="message bot">
+                    <i class="fas fa-robot"></i>
+                    <p>Hi! How can I help you today?</p>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Type a message...">
+            <button class="send-message"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    <button class="chat-toggle">
+        <i class="fas fa-comments"></i>
+    </button>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
