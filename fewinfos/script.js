@@ -239,6 +239,19 @@ function sendUserMessage() {
     }, 1000);
 }
 
+// Service contact buttons
+document.querySelectorAll('.contact-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const service = e.target.closest('.service-card').querySelector('h3').textContent;
+        addMessage(`I'm interested in your ${service} service. Can you tell me more?`, true);
+        setTimeout(() => {
+            addMessage(`Thank you for your interest in our ${service} service. One of our specialists will contact you shortly.`);
+        }, 1000);
+        chatbot.classList.add('active');
+    });
+});
+
 // Add smooth scroll functionality
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

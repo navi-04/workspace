@@ -734,6 +734,258 @@ body {
     }
 }
 
+.services-section {
+    min-height: 100vh;
+    padding: 120px 2rem;
+    background: var(--bg-light-blue);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    margin-top: 4rem;
+    padding: 1rem;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(44, 95, 208, 0.1);
+    box-shadow: 0 10px 30px rgba(44, 95, 208, 0.1);
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    background: var(--primary);
+    color: var(--light);
+}
+
+.service-icon {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+    color: var(--light);
+    transform: scale(1.1);
+}
+
+.service-card h3 {
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover h3 {
+    color: var(--light);
+}
+
+.service-card p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover p {
+    color: var(--light);
+}
+
+.service-hover {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.service-card:hover .service-hover {
+    bottom: 0;
+}
+
+.service-action {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--dark);
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    background: rgba(143, 230, 190, 0.95);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(44, 95, 208, 0.1);
+}
+
+.contact-text {
+    color: var(--dark);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.service-action i {
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-action,
+.service-card:hover .contact-text,
+.service-card:hover .service-action i {
+    color: var(--light);
+}
+
+.service-action i {
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.service-action:hover {
+    background: var(--primary);
+    color: var(--light);
+    transform: translateY(-2px);
+}
+
+.service-action:hover .contact-text {
+    transform: translateX(-3px);
+}
+
+.service-action:hover i {
+    transform: translateX(3px);
+}
+
+.contact-text {
+    color: var(--primary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.3s ease 0.1s;
+}
+
+.service-card:hover .contact-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.service-card:hover .contact-btn {
+    color: var(--primary);
+}
+
+.service-card:hover .contact-text {
+    color: var(--light);
+}
+
+.service-action {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+}
+
+.contact-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.service-card:hover .service-action {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.service-card:hover .contact-btn {
+    color: var(--light);
+    transform: rotate(15deg);
+}
+
+.contact-btn:hover {
+    transform: rotate(30deg) scale(1.2) !important;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.tech-tags span {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    color: var(--light);
+}
+
+@media (max-width: 1200px) {
+    .services-grid {
+        gap: 2rem;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-section {
+        padding: 80px 1rem;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .service-card {
+        padding: 2rem;
+        min-height: 280px;
+    }
+}
+
 .chatbot {
     position: fixed;
     bottom: 100px;
