@@ -737,7 +737,7 @@ body {
 .services-section {
     min-height: 100vh;
     padding: 120px 2rem;
-    background: var(--bg-light-blue);
+    background: transparent; /* Changed from var(--bg-light-blue) to transparent */
     position: relative;
     z-index: 2;
     display: flex;
@@ -760,6 +760,8 @@ body {
 
 .service-card {
     background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     border-radius: 20px;
     padding: 3rem 2rem;
     text-align: center;
@@ -972,17 +974,57 @@ body {
 
 @media (max-width: 768px) {
     .services-section {
-        padding: 80px 1rem;
+        padding: 80px 0;
+        position: relative;
     }
 
     .services-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        display: flex;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 2rem;
+        gap: 1.5rem;
+        margin: 0;
     }
 
     .service-card {
-        padding: 2rem;
-        min-height: 280px;
+        min-width: 85%;
+        width: 85%;
+        margin-left: 2rem;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+    }
+
+    .service-nav {
+        position: absolute;
+        bottom: 5rem; /* Changed from 2rem to be closer to cards */
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 1.5rem;
+        z-index: 10;
+    }
+
+    .service-nav button {
+        background: rgba(44, 95, 208, 0.9);
+        color: var(--light);
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(44, 95, 208, 0.3);
+        backdrop-filter: blur(5px);
+    }
+
+    .service-nav button:hover {
+        transform: scale(1.1);
+        background: var(--primary);
     }
 }
 

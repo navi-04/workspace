@@ -265,3 +265,63 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Handle service cards scrolling
+const servicesGrid = document.querySelector('.services-grid');
+if (servicesGrid && window.innerWidth <= 768) {
+    let startX;
+    let scrollLeft;
+    let isDown = false;
+
+    servicesGrid.addEventListener('mousedown', e => {
+        isDown = true;
+        startX = e.pageX - servicesGrid.offsetLeft;
+        scrollLeft = servicesGrid.scrollLeft;
+    });
+
+    servicesGrid.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    servicesGrid.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+
+    servicesGrid.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - servicesGrid.offsetLeft;
+        const walk = (x - startX) * 2;
+        servicesGrid.scrollLeft = scrollLeft - walk;
+    });
+
+    const prevBtn = document.querySelector('.prev-service');
+    const nextBtn = document.querySelector('.next-service');
+    const cardWidth = servicesGrid.querySelector('.service-card').offsetWidth;
+    const scrollAmount = cardWidth + 24; // card width + gap
+
+    nextBtn.addEventListener('click', () => {
+        servicesGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    prevBtn.addEventListener('click', () => {
+        servicesGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+
+    // Touch handling
+    servicesGrid.addEventListener('touchstart', e => {
+        startX = e.touches[0].pageX - servicesGrid.offsetLeft;
+        scrollLeft = servicesGrid.scrollLeft;
+    }, { passive: true });
+
+    servicesGrid.addEventListener('touchmove', e => {
+        if (!startX) return;
+        const x = e.touches[0].pageX - servicesGrid.offsetLeft;
+        const walk = (startX - x) * 2;
+        servicesGrid.scrollLeft = scrollLeft + walk;
+    }, { passive: true });
+
+    servicesGrid.addEventListener('touchend', () => {
+        startX = null;
+    });
+}
