@@ -269,13 +269,73 @@ body {
 }
 
 .hero {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
+    padding: 120px 2rem;
     position: relative;
     z-index: 2;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 1rem;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    .glitch-wrapper {
+        font-size: clamp(2.5rem, 8vw, 6rem);
+    }
+
+    .tech-stack {
+        margin-top: 3rem;
+        gap: 1rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        letter-spacing: 0.2em;
+        margin-top: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 80px 1rem;
+    }
+
+    .glitch-wrapper {
+        font-size: clamp(2rem, 7vw, 4rem);
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 0.15em;
+    }
+
+    .tech-stack {
+        margin-top: 2rem;
+    }
+
+    .stack-item {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
 }
 
 .floating-elements {

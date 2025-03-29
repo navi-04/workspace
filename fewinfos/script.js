@@ -2,10 +2,10 @@
 particlesJS('particles-js', {
     particles: {
         number: {
-            value: 120,
+            value: 130,
             density: {
                 enable: true,
-                value_area: 800
+                value_area: 700
             }
         },
         color: {
@@ -48,7 +48,7 @@ particlesJS('particles-js', {
             random: true,
             straight: false,
             out_mode: "out",
-            bounce: false,
+            bounce: true,
             attract: {
                 enable: true,
                 rotateX: 600,
