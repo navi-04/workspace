@@ -385,3 +385,36 @@ function createObserver() {
 
 // Initialize scroll animations
 document.addEventListener('DOMContentLoaded', createObserver);
+
+// Replace the team slider code with this version
+const teamSlider = document.querySelector('.team-members');
+const prevTeamBtn = document.querySelector('.prev-team');
+const nextTeamBtn = document.querySelector('.next-team');
+
+if (teamSlider && prevTeamBtn && nextTeamBtn) {
+    const cards = [...teamSlider.children];
+    const cardWidth = cards[0].offsetWidth + 32; // card width + gap
+    const totalWidth = cardWidth * (cards.length - 3); // Show 3 cards at a time
+    let currentPosition = 0;
+    let isScrolling = false;
+
+    function updateTeamPosition(direction) {
+        if (isScrolling) return;
+        isScrolling = true;
+
+        if (direction === 'next') {
+            currentPosition = Math.max(-(totalWidth), currentPosition - cardWidth);
+        } else {
+            currentPosition = Math.min(0, currentPosition + cardWidth);
+        }
+
+        teamSlider.style.transform = `translateX(${currentPosition}px)`;
+
+        setTimeout(() => {
+            isScrolling = false;
+        }, 500);
+    }
+
+    nextTeamBtn.addEventListener('click', () => updateTeamPosition('next'));
+    prevTeamBtn.addEventListener('click', () => updateTeamPosition('prev'));
+}
