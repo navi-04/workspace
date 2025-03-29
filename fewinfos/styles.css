@@ -895,3 +895,142 @@ body {
         font-size: 1.1rem;
     }
 }
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .hero-content {
+        padding: 0 2rem;
+    }
+
+    .glitch-wrapper {
+        font-size: clamp(2.5rem, 12vw, 8rem);
+    }
+
+    .tech-stack {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 1rem;
+    }
+
+    .glitch-wrapper {
+        font-size: clamp(2rem, 10vw, 6rem);
+    }
+
+    .subtitle {
+        font-size: 1rem;
+        letter-spacing: 0.3em;
+    }
+
+    .stack-item {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+
+    .hexagon {
+        width: 80px;
+        height: 92px;
+    }
+
+    .about-section {
+        padding: 80px 1rem;
+    }
+
+    .about-container {
+        padding: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .about-text p {
+        font-size: 1.1rem;
+        padding: 1.5rem;
+        line-height: 1.8;
+    }
+
+    .feature {
+        padding: 1.5rem;
+    }
+
+    .feature i {
+        font-size: 2rem;
+    }
+
+    .feature h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        padding: 0 1rem;
+    }
+
+    .glitch-wrapper {
+        font-size: clamp(1.8rem, 8vw, 4rem);
+    }
+
+    .subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 0.2em;
+    }
+
+    .tech-stack {
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .stack-item {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.8rem;
+    }
+
+    .about-section {
+        padding: 60px 1rem;
+    }
+
+    .about-container {
+        padding: 1rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .about-text p {
+        font-size: 1rem;
+        padding: 1rem;
+        line-height: 1.6;
+    }
+
+    .feature {
+        padding: 1rem;
+    }
+
+    .feature i {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature h3 {
+        font-size: 1.1rem;
+    }
+
+    .feature p {
+        font-size: 0.9rem;
+    }
+
+    .chatbot {
+        width: 90%;
+        right: 5%;
+        bottom: 80px;
+    }
+}
