@@ -242,13 +242,17 @@ function sendUserMessage() {
 // Service contact buttons
 document.querySelectorAll('.contact-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const service = e.target.closest('.service-card').querySelector('h3').textContent;
-        addMessage(`I'm interested in your ${service} service. Can you tell me more?`, true);
-        setTimeout(() => {
-            addMessage(`Thank you for your interest in our ${service} service. One of our specialists will contact you shortly.`);
-        }, 1000);
+        const serviceCard = e.target.closest('.service-card');
+        const serviceName = serviceCard.querySelector('h3').textContent;
+        addMessage(`I'm interested in your ${serviceName} service. Can you tell me more?`, true);
+        
+        // Show chatbot
         chatbot.classList.add('active');
+        
+        // Simulate bot response after delay
+        setTimeout(() => {
+            addMessage(`Thank you for your interest in our ${serviceName} service. One of our specialists will contact you shortly.`);
+        }, 1000);
     });
 });
 
@@ -325,3 +329,59 @@ if (servicesGrid && window.innerWidth <= 768) {
         startX = null;
     });
 }
+
+// Service navigation functionality
+const prevBtnNav = document.querySelector('.prev-service');
+const nextBtnNav = document.querySelector('.next-service');
+const servicesGridNav = document.querySelector('.services-grid');
+
+if (prevBtnNav && nextBtnNav && servicesGridNav) {
+    const scrollAmountNav = window.innerWidth <= 768 ? servicesGridNav.clientWidth * 0.85 + 24 : 0;
+
+    nextBtnNav.addEventListener('click', () => {
+        servicesGridNav.scrollBy({
+            left: scrollAmountNav,
+            behavior: 'smooth'
+        });
+    });
+
+    prevBtnNav.addEventListener('click', () => {
+        servicesGridNav.scrollBy({
+            left: -scrollAmountNav,
+            behavior: 'smooth'
+        });
+    });
+
+    // Hide navigation buttons on desktop
+    function updateNavVisibility() {
+        const isMobile = window.innerWidth <= 768;
+        prevBtnNav.style.display = isMobile ? 'flex' : 'none';
+        nextBtnNav.style.display = isMobile ? 'flex' : 'none';
+    }
+
+    // Initial check and listen for window resize
+    updateNavVisibility();
+    window.addEventListener('resize', updateNavVisibility);
+}
+
+// Scroll animations
+function createObserver() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('scroll-visible');
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+
+    // Observe all animated elements
+    document.querySelectorAll('.scroll-animate').forEach(element => {
+        element.classList.add('scroll-hidden');
+        observer.observe(element);
+    });
+}
+
+// Initialize scroll animations
+document.addEventListener('DOMContentLoaded', createObserver);

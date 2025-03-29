@@ -289,6 +289,16 @@ body {
     padding: 2rem;
 }
 
+.glitch-wrapper {
+    font-size: clamp(4rem, 15vw, 10rem);
+    font-weight: 900;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
 @media (max-width: 768px) {
     .hero {
         padding: 120px 1rem 80px;
@@ -304,7 +314,8 @@ body {
     }
 
     .glitch-wrapper {
-        font-size: clamp(3rem, 12vw, 6rem);
+        font-size: clamp(3.5rem, 12vw, 8rem);
+        gap: 0.8rem;
     }
 
     .tech-stack {
@@ -319,7 +330,9 @@ body {
     }
 
     .glitch-wrapper {
-        font-size: clamp(2.5rem, 10vw, 5rem);
+        font-size: clamp(3rem, 10vw, 6rem);
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
     }
 
     .tech-stack {
@@ -424,12 +437,13 @@ body {
 }
 
 .glitch-wrapper {
-    font-size: clamp(3rem, 15vw, 10rem);
+    font-size: clamp(4rem, 15vw, 10rem);
     font-weight: 900;
     line-height: 1;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .glitch {
@@ -916,38 +930,39 @@ body {
     color: var(--light);
 }
 
-.service-action {
+.contact-btn {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    opacity: 0;
-    transform: scale(0.8);
+    transform: none;
+    background: var(--primary);
+    color: var(--light);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     transition: all 0.3s ease;
+    opacity: 0;
+    z-index: 2;
 }
 
-.contact-btn {
-    background: none;
-    border: none;
-    color: var(--primary);
-    font-size: 1.5rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: all 0.3s ease;
+.service-card:hover .contact-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.contact-btn:hover {
+    background: var(--secondary);
+    transform: translateY(-2px) !important;
 }
 
 .service-card:hover .service-action {
     opacity: 1;
     transform: scale(1);
-}
-
-.service-card:hover .contact-btn {
-    color: var(--light);
-    transform: rotate(15deg);
-}
-
-.contact-btn:hover {
-    transform: rotate(30deg) scale(1.2) !important;
 }
 
 .tech-tags {
@@ -963,6 +978,97 @@ body {
     border-radius: 15px;
     font-size: 0.9rem;
     color: var(--light);
+}
+
+.service-nav {
+    display: none; /* Hide by default on desktop */
+    position: relative; /* Changed from absolute */
+    margin-top: 2rem;
+    width: 100%;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    .services-section {
+        padding: 80px 0;
+        position: relative;
+    }
+
+    .services-grid {
+        display: flex;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding: 2rem;
+        gap: 1.5rem;
+        margin: 0;
+    }
+
+    .service-card {
+        min-width: 85%;
+        width: 85%;
+        margin-left: 2rem;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+    }
+
+    .service-nav {
+        display: flex; /* Show on mobile */
+        margin-top: 2rem;
+    }
+
+    .service-nav button {
+        background: rgba(44, 95, 208, 0.9);
+        color: var(--light);
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(44, 95, 208, 0.3);
+        backdrop-filter: blur(5px);
+    }
+}
+
+.service-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.service-nav button {
+    background: rgba(44, 95, 208, 0.9);
+    color: var(--light);
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(44, 95, 208, 0.3);
+    backdrop-filter: blur(5px);
+    pointer-events: auto;
+}
+
+.service-nav button:hover {
+    transform: scale(1.1);
+    background: var(--primary);
 }
 
 @media (max-width: 1200px) {
@@ -997,13 +1103,8 @@ body {
     }
 
     .service-nav {
-        position: absolute;
-        bottom: 5rem; /* Changed from 2rem to be closer to cards */
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 1.5rem;
-        z-index: 10;
+        display: flex; /* Show on mobile */
+        margin-top: 2rem;
     }
 
     .service-nav button {
@@ -1598,7 +1699,7 @@ body {
     }
 
     .glitch-wrapper {
-        font-size: clamp(2.5rem, 12vw, 8rem);
+        font-size: clamp(4.5rem, 18vw, 10rem);
     }
 
     .tech-stack {
