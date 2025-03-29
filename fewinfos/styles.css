@@ -270,8 +270,8 @@ body {
 
 .hero {
     min-height: 100vh;
-    height: auto;
-    padding: 120px 2rem;
+    height: 100%;
+    padding: 150px 2rem;
     position: relative;
     z-index: 2;
     overflow: hidden;
@@ -286,7 +286,53 @@ body {
     position: relative;
     z-index: 3;
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 120px 1rem 80px;
+        min-height: 100dvh; /* Use dynamic viewport height for mobile */
+    }
+
+    .hero-content {
+        padding: 2rem 1rem;
+    }
+
+    .company-title {
+        margin-bottom: 3rem;
+    }
+
+    .glitch-wrapper {
+        font-size: clamp(3rem, 12vw, 6rem);
+    }
+
+    .tech-stack {
+        margin-top: 4rem;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 100px 1rem 60px;
+    }
+
+    .glitch-wrapper {
+        font-size: clamp(2.5rem, 10vw, 5rem);
+    }
+
+    .tech-stack {
+        margin-top: 3rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .stack-item {
+        width: 80%;
+        max-width: 250px;
+    }
 }
 
 @media (max-width: 768px) {
