@@ -1358,6 +1358,22 @@ body {
     transition: all 0.3s ease;
 }
 
+.about-headline {
+    font-size: 2rem;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    color: var(--primary);
+    font-weight: 700;
+    text-align: center;
+}
+
+.about-description {
+    font-size: 1.4rem;
+    line-height: 2;
+    color: var(--dark);
+    text-align: center;
+}
+
 @media (max-width: 992px) {
     .about-content {
         grid-template-columns: 1fr;
