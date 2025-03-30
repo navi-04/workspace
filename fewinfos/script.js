@@ -386,24 +386,42 @@ function createObserver() {
 // Initialize scroll animations
 document.addEventListener('DOMContentLoaded', createObserver);
 
-// Replace the team slider code with this version
+// Team slider functionality
 const teamSlider = document.querySelector('.team-members');
 const prevTeamBtn = document.querySelector('.prev-team');
 const nextTeamBtn = document.querySelector('.next-team');
 
 if (teamSlider && prevTeamBtn && nextTeamBtn) {
     const cards = [...teamSlider.children];
-    const cardWidth = cards[0].offsetWidth + 32; // card width + gap
-    const totalWidth = cardWidth * (cards.length - 3); // Show 3 cards at a time
+    
+    // Calculate the correct card width including margin/gap
+    const cardStyle = window.getComputedStyle(cards[0]);
+    const cardWidth = cards[0].offsetWidth + 
+                     parseInt(cardStyle.marginLeft || 0) + 
+                     parseInt(cardStyle.marginRight || 0) + 
+                     parseInt(getComputedStyle(teamSlider).columnGap || 32); // Default gap is 2rem (32px)
+    
+    // Calculate how many cards to show based on viewport width
+    const getVisibleCards = () => {
+        if (window.innerWidth <= 768) return 1;
+        if (window.innerWidth <= 1024) return 2;
+        return 3;
+    };
+    
+    // Calculate the total scrollable width
+    const calculateTotalWidth = () => cardWidth * (cards.length - getVisibleCards());
+    
     let currentPosition = 0;
     let isScrolling = false;
 
     function updateTeamPosition(direction) {
         if (isScrolling) return;
         isScrolling = true;
+        
+        const totalWidth = calculateTotalWidth();
 
         if (direction === 'next') {
-            currentPosition = Math.max(-(totalWidth), currentPosition - cardWidth);
+            currentPosition = Math.max(-totalWidth, currentPosition - cardWidth);
         } else {
             currentPosition = Math.min(0, currentPosition + cardWidth);
         }
@@ -417,4 +435,10 @@ if (teamSlider && prevTeamBtn && nextTeamBtn) {
 
     nextTeamBtn.addEventListener('click', () => updateTeamPosition('next'));
     prevTeamBtn.addEventListener('click', () => updateTeamPosition('prev'));
+    
+    // Recalculate on window resize
+    window.addEventListener('resize', () => {
+        currentPosition = 0;
+        teamSlider.style.transform = `translateX(0)`;
+    });
 }

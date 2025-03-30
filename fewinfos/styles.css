@@ -2301,8 +2301,60 @@ body {
 .team-members {
     display: flex;
     gap: 2rem;
-    width: max-content;
+    width: 100%;
     transition: transform 0.5s ease;
+}
+
+.member-card {
+    min-width: 280px;
+    max-width: 280px;
+    flex: 0 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 1.5rem;
+    text-align: left;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(44, 95, 208, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-nav {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.team-nav button {
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--light);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    box-shadow: 0 4px 15px rgba(44, 95, 208, 0.3);
+    opacity: 1;
+}
+
+.team-nav button:hover {
+    transform: scale(1.1);
+    background: var(--secondary);
 }
 
 .team-members {
