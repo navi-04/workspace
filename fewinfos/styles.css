@@ -2296,19 +2296,20 @@ body {
     position: relative;
     overflow: hidden;
     padding: 2rem 0;
+    margin: 0 -1rem; /* Negative margin to account for container padding */
 }
 
 .team-members {
     display: flex;
     gap: 2rem;
-    width: 100%;
-    transition: transform 0.5s ease;
+    padding: 1rem;
+    transition: transform 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    will-change: transform;
 }
 
 .member-card {
     min-width: 280px;
     max-width: 280px;
-    flex: 0 0 auto;
     background: rgba(255, 255, 255, 0.95);
     border-radius: 25px;
     padding: 1.5rem;
@@ -2319,6 +2320,27 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
     overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeInUp 0.5s ease-out forwards;
+    animation-delay: calc(var(--i, 0) * 0.1s);
+}
+
+@keyframes fadeInUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.member-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(44, 95, 208, 0.2);
+    background: linear-gradient(145deg, var(--primary), var(--secondary));
 }
 
 .team-nav {
@@ -2329,7 +2351,7 @@ body {
     transform: translateY(-50%);
     display: flex;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
     pointer-events: none;
     z-index: 10;
 }
@@ -2349,12 +2371,16 @@ body {
     transition: all 0.3s ease;
     pointer-events: auto;
     box-shadow: 0 4px 15px rgba(44, 95, 208, 0.3);
-    opacity: 1;
 }
 
-.team-nav button:hover {
+.team-nav button:hover:not([disabled]) {
     transform: scale(1.1);
     background: var(--secondary);
+}
+
+.team-nav button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .team-members {

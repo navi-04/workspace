@@ -386,59 +386,85 @@ function createObserver() {
 // Initialize scroll animations
 document.addEventListener('DOMContentLoaded', createObserver);
 
-// Team slider functionality
+// Team slider functionality - Fixed version
 const teamSlider = document.querySelector('.team-members');
 const prevTeamBtn = document.querySelector('.prev-team');
 const nextTeamBtn = document.querySelector('.next-team');
 
 if (teamSlider && prevTeamBtn && nextTeamBtn) {
-    const cards = [...teamSlider.children];
+    const cards = Array.from(teamSlider.querySelectorAll('.member-card'));
     
-    // Calculate the correct card width including margin/gap
-    const cardStyle = window.getComputedStyle(cards[0]);
-    const cardWidth = cards[0].offsetWidth + 
-                     parseInt(cardStyle.marginLeft || 0) + 
-                     parseInt(cardStyle.marginRight || 0) + 
-                     parseInt(getComputedStyle(teamSlider).columnGap || 32); // Default gap is 2rem (32px)
+    // Set animation delay for staggered appearance
+    cards.forEach((card, index) => {
+        card.style.setProperty('--i', index);
+    });
+    
+    // Calculate the correct card width including gap
+    const cardWidth = cards[0].offsetWidth;
+    const cardGap = parseInt(window.getComputedStyle(teamSlider).columnGap || '32');
+    const slideAmount = cardWidth + cardGap;
     
     // Calculate how many cards to show based on viewport width
     const getVisibleCards = () => {
-        if (window.innerWidth <= 768) return 1;
-        if (window.innerWidth <= 1024) return 2;
+        const viewportWidth = window.innerWidth;
+        if (viewportWidth <= 768) return 1;
+        if (viewportWidth <= 1024) return 2;
         return 3;
     };
     
-    // Calculate the total scrollable width
-    const calculateTotalWidth = () => cardWidth * (cards.length - getVisibleCards());
-    
     let currentPosition = 0;
-    let isScrolling = false;
-
-    function updateTeamPosition(direction) {
-        if (isScrolling) return;
-        isScrolling = true;
+    let maxScroll;
+    
+    // Function to update maxScroll based on current viewport
+    const updateMaxScroll = () => {
+        const visibleCards = getVisibleCards();
+        maxScroll = (cards.length - visibleCards) * slideAmount;
+    };
+    
+    updateMaxScroll();
+    
+    // Update slider position and enable/disable buttons
+    const updateSliderPosition = () => {
+        teamSlider.style.transform = `translateX(${-currentPosition}px)`;
         
-        const totalWidth = calculateTotalWidth();
-
-        if (direction === 'next') {
-            currentPosition = Math.max(-totalWidth, currentPosition - cardWidth);
-        } else {
-            currentPosition = Math.min(0, currentPosition + cardWidth);
+        // Enable/disable buttons based on position
+        prevTeamBtn.disabled = currentPosition <= 0;
+        nextTeamBtn.disabled = currentPosition >= maxScroll;
+        
+        // Visual feedback for disabled buttons
+        prevTeamBtn.style.opacity = prevTeamBtn.disabled ? "0.5" : "1";
+        nextTeamBtn.style.opacity = nextTeamBtn.disabled ? "0.5" : "1";
+    };
+    
+    // Initialize button state
+    updateSliderPosition();
+    
+    // Navigation event handlers
+    nextTeamBtn.addEventListener('click', () => {
+        if (currentPosition < maxScroll) {
+            currentPosition += slideAmount;
+            if (currentPosition > maxScroll) currentPosition = maxScroll;
+            updateSliderPosition();
         }
-
-        teamSlider.style.transform = `translateX(${currentPosition}px)`;
-
-        setTimeout(() => {
-            isScrolling = false;
-        }, 500);
-    }
-
-    nextTeamBtn.addEventListener('click', () => updateTeamPosition('next'));
-    prevTeamBtn.addEventListener('click', () => updateTeamPosition('prev'));
+    });
+    
+    prevTeamBtn.addEventListener('click', () => {
+        if (currentPosition > 0) {
+            currentPosition -= slideAmount;
+            if (currentPosition < 0) currentPosition = 0;
+            updateSliderPosition();
+        }
+    });
     
     // Recalculate on window resize
     window.addEventListener('resize', () => {
-        currentPosition = 0;
-        teamSlider.style.transform = `translateX(0)`;
+        updateMaxScroll();
+        
+        // Reset position if we're past the maximum scroll
+        if (currentPosition > maxScroll) {
+            currentPosition = maxScroll;
+        }
+        
+        updateSliderPosition();
     });
 }
