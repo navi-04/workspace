@@ -2298,6 +2298,9 @@ body {
     padding: 2rem 0;
     margin: 0 -1rem; /* Negative margin to account for container padding */
     touch-action: pan-y; /* Allow vertical scroll but capture horizontal */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    -webkit-user-select: none; /* Prevent text selection during swipe */
+    user-select: none;
 }
 
 .team-members {
@@ -2310,28 +2313,49 @@ body {
 
 /* Remove transition during active dragging for better responsiveness */
 .team-members.dragging {
-    transition: none;
+    transition: none !important;
     cursor: grabbing;
 }
 
-/* Add visual cue for touch devices */
+/* Scroll indicator for touch devices */
+.scroll-indicator {
+    position: absolute;
+    bottom: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background: rgba(44, 95, 208, 0.3);
+    border-radius: 2px;
+    opacity: 0.7;
+    pointer-events: none;
+    display: none;
+}
+
 @media (hover: none) {
+    .scroll-indicator {
+        display: block;
+    }
+    
+    /* Add visual cues for swiping */
     .team-slider::after {
         content: '';
         position: absolute;
-        bottom: 0.5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 4px;
-        background: rgba(44, 95, 208, 0.3);
-        border-radius: 2px;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        border-right: 2px solid rgba(44, 95, 208, 0.4);
+        border-bottom: 2px solid rgba(44, 95, 208, 0.4);
+        transform: translateY(-50%) rotate(-45deg);
+        animation: indicatorPulse 1.5s infinite;
         opacity: 0.7;
-        pointer-events: none;
     }
     
-    .team-nav {
-        opacity: 0.7;
+    @keyframes indicatorPulse {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 0.7; }
     }
 }
 
@@ -2345,7 +2369,35 @@ body {
     
     .member-card {
         scroll-snap-align: center;
+        touch-action: pan-x; /* Ensure horizontal touch gestures work */
     }
+    
+    /* Make cards more responsive to touch */
+    .member-card:active {
+        transform: scale(0.98);
+        transition: transform 0.2s;
+    }
+    
+    /* Show navigation buttons on touch */
+    .team-nav {
+        opacity: 0.7;
+    }
+}
+
+/* Fix for long press selection on touch devices */
+.member-image, 
+.member-card h3,
+.member-card span {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Better visual indicator for disabled buttons */
+.team-nav button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: rgba(44, 95, 208, 0.5);
 }
 
 .team-slider {

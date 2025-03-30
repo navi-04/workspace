@@ -386,7 +386,7 @@ function createObserver() {
 // Initialize scroll animations
 document.addEventListener('DOMContentLoaded', createObserver);
 
-// Team slider functionality with touch support
+// Team slider functionality with improved touch support
 const teamSlider = document.querySelector('.team-members');
 const prevTeamBtn = document.querySelector('.prev-team');
 const nextTeamBtn = document.querySelector('.next-team');
@@ -420,6 +420,8 @@ if (teamSlider && prevTeamBtn && nextTeamBtn) {
     let touchEndX = 0;
     let isDragging = false;
     let startPosition = 0;
+    let startTime = 0;
+    let isTouchScrolling = false;
     
     // Function to update maxScroll based on current viewport
     const updateMaxScroll = () => {
@@ -430,7 +432,13 @@ if (teamSlider && prevTeamBtn && nextTeamBtn) {
     updateMaxScroll();
     
     // Update slider position and enable/disable buttons
-    const updateSliderPosition = () => {
+    const updateSliderPosition = (useTransition = true) => {
+        if (useTransition) {
+            teamSlider.style.transition = 'transform 0.3s ease';
+        } else {
+            teamSlider.style.transition = 'none';
+        }
+        
         teamSlider.style.transform = `translateX(${-currentPosition}px)`;
         
         // Enable/disable buttons based on position
@@ -440,10 +448,24 @@ if (teamSlider && prevTeamBtn && nextTeamBtn) {
         // Visual feedback for disabled buttons
         prevTeamBtn.style.opacity = prevTeamBtn.disabled ? "0.5" : "1";
         nextTeamBtn.style.opacity = nextTeamBtn.disabled ? "0.5" : "1";
+        
+        // Reset transition after animation completes
+        if (useTransition) {
+            setTimeout(() => {
+                teamSlider.style.transition = '';
+            }, 300);
+        }
     };
     
     // Initialize button state
-    updateSliderPosition();
+    updateSliderPosition(false);
+    
+    // Add scroll indicator for mobile
+    if (window.innerWidth <= 768) {
+        const indicator = document.createElement('div');
+        indicator.className = 'scroll-indicator';
+        teamSlider.parentNode.appendChild(indicator);
+    }
     
     // Navigation event handlers
     nextTeamBtn.addEventListener('click', () => {
@@ -466,10 +488,13 @@ if (teamSlider && prevTeamBtn && nextTeamBtn) {
     teamSlider.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
         startPosition = currentPosition;
+        startTime = Date.now();
         isDragging = true;
+        isTouchScrolling = true;
         
         // Add active class for visual feedback
         teamSlider.classList.add('dragging');
+        updateSliderPosition(false); // Disable transition during drag
     }, { passive: true });
     
     teamSlider.addEventListener('touchmove', (e) => {
@@ -479,40 +504,75 @@ if (teamSlider && prevTeamBtn && nextTeamBtn) {
         const diffX = touchStartX - touchEndX;
         let newPosition = startPosition + diffX;
         
-        // Limit scrolling to bounds with resistance
+        // Add resistance when dragging beyond limits
         if (newPosition < 0) {
-            newPosition = 0;
+            newPosition = -Math.pow(-newPosition, 0.7);
         } else if (newPosition > maxScroll) {
-            newPosition = maxScroll;
+            const overScroll = newPosition - maxScroll;
+            newPosition = maxScroll + Math.pow(overScroll, 0.7);
         }
         
         currentPosition = newPosition;
         teamSlider.style.transform = `translateX(${-currentPosition}px)`;
+        
+        // Update pointer events
+        cards.forEach(card => {
+            card.style.pointerEvents = 'none';
+        });
     }, { passive: true });
     
     teamSlider.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        
         isDragging = false;
         
         // Remove active class
         teamSlider.classList.remove('dragging');
         
-        // Snap to nearest card
-        const cardIndex = Math.round(currentPosition / slideAmount);
-        currentPosition = cardIndex * slideAmount;
+        // Get velocity for flick/swipe detection
+        const endTime = Date.now();
+        const timeElapsed = endTime - startTime;
+        const touchDiff = touchStartX - touchEndX;
+        const velocity = Math.abs(touchDiff / timeElapsed);
+        
+        if (velocity > 0.5) {
+            // Fast swipe - move in the direction of the swipe
+            if (touchDiff > 50) {
+                // Swipe left - move right
+                currentPosition += slideAmount;
+            } else if (touchDiff < -50) {
+                // Swipe right - move left
+                currentPosition -= slideAmount;
+            }
+        } else {
+            // Slow drag - snap to nearest card
+            const cardIndex = Math.round(currentPosition / slideAmount);
+            currentPosition = cardIndex * slideAmount;
+        }
         
         // Ensure we don't go beyond bounds
         if (currentPosition < 0) currentPosition = 0;
         if (currentPosition > maxScroll) currentPosition = maxScroll;
         
         // Apply smooth transition for snapping
-        teamSlider.style.transition = 'transform 0.3s ease';
-        updateSliderPosition();
+        updateSliderPosition(true);
         
-        // Reset transition
+        // Re-enable pointer events after a short delay
         setTimeout(() => {
-            teamSlider.style.transition = '';
+            cards.forEach(card => {
+                card.style.pointerEvents = '';
+            });
+            isTouchScrolling = false;
         }, 300);
     });
+    
+    // Prevent clicking during touch scroll
+    teamSlider.addEventListener('click', (e) => {
+        if (isTouchScrolling) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }, true);
     
     // Recalculate on window resize
     window.addEventListener('resize', () => {
@@ -523,6 +583,12 @@ if (teamSlider && prevTeamBtn && nextTeamBtn) {
             currentPosition = maxScroll;
         }
         
-        updateSliderPosition();
+        updateSliderPosition(false);
+        
+        // Update scroll indicator visibility
+        const indicator = document.querySelector('.scroll-indicator');
+        if (indicator) {
+            indicator.style.display = window.innerWidth <= 768 ? 'block' : 'none';
+        }
     });
 }
