@@ -386,7 +386,7 @@ function createObserver() {
 // Initialize scroll animations
 document.addEventListener('DOMContentLoaded', createObserver);
 
-// Team slider functionality - Fixed version
+// Team slider functionality with touch support
 const teamSlider = document.querySelector('.team-members');
 const prevTeamBtn = document.querySelector('.prev-team');
 const nextTeamBtn = document.querySelector('.next-team');
@@ -415,10 +415,16 @@ if (teamSlider && prevTeamBtn && nextTeamBtn) {
     let currentPosition = 0;
     let maxScroll;
     
+    // Touch variables
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isDragging = false;
+    let startPosition = 0;
+    
     // Function to update maxScroll based on current viewport
     const updateMaxScroll = () => {
         const visibleCards = getVisibleCards();
-        maxScroll = (cards.length - visibleCards) * slideAmount;
+        maxScroll = Math.max(0, (cards.length - visibleCards) * slideAmount);
     };
     
     updateMaxScroll();
@@ -454,6 +460,58 @@ if (teamSlider && prevTeamBtn && nextTeamBtn) {
             if (currentPosition < 0) currentPosition = 0;
             updateSliderPosition();
         }
+    });
+    
+    // Touch event handlers for mobile
+    teamSlider.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        startPosition = currentPosition;
+        isDragging = true;
+        
+        // Add active class for visual feedback
+        teamSlider.classList.add('dragging');
+    }, { passive: true });
+    
+    teamSlider.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        
+        touchEndX = e.touches[0].clientX;
+        const diffX = touchStartX - touchEndX;
+        let newPosition = startPosition + diffX;
+        
+        // Limit scrolling to bounds with resistance
+        if (newPosition < 0) {
+            newPosition = 0;
+        } else if (newPosition > maxScroll) {
+            newPosition = maxScroll;
+        }
+        
+        currentPosition = newPosition;
+        teamSlider.style.transform = `translateX(${-currentPosition}px)`;
+    }, { passive: true });
+    
+    teamSlider.addEventListener('touchend', () => {
+        isDragging = false;
+        
+        // Remove active class
+        teamSlider.classList.remove('dragging');
+        
+        // Snap to nearest card
+        const cardIndex = Math.round(currentPosition / slideAmount);
+        currentPosition = cardIndex * slideAmount;
+        
+        // Ensure we don't go beyond bounds
+        if (currentPosition < 0) currentPosition = 0;
+        if (currentPosition > maxScroll) currentPosition = maxScroll;
+        
+        // Apply smooth transition for snapping
+        teamSlider.style.transition = 'transform 0.3s ease';
+        updateSliderPosition();
+        
+        // Reset transition
+        setTimeout(() => {
+            teamSlider.style.transition = '';
+        }, 300);
     });
     
     // Recalculate on window resize
