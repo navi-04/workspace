@@ -3147,10 +3147,18 @@ body {
     margin-bottom: 1rem;
 }
 
+.empty-events #sub-icon {
+    font-size: 1rem;
+    color: white;
+    opacity: 0.7;
+   
+}
+
 .empty-events h4 {
     font-size: 1.6rem;
     color: var(--primary);
     margin-bottom: 1rem;
+    margin-left: 4rem;
     width: 100%;
 }
 
@@ -3369,26 +3377,6 @@ body {
     box-shadow: 0 5px 15px rgba(44, 95, 208, 0.1);
 }
 
-.form-group label {
-    position: absolute;
-    left: 3rem;
-    top: 1rem;
-    color: rgba(44, 95, 208, 0.6);
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-
-.form-group input:focus ~ label,
-.form-group textarea:focus ~ label,
-.form-group input:valid ~ label,
-.form-group textarea:valid ~ label {
-    top: -0.5rem;
-    left: 1rem;
-    font-size: 0.8rem;
-    background: var(--light);
-    padding: 0 0.5rem;
-    color: var(--primary);
-}
 
 .form-icon {
     position: absolute;

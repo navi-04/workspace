@@ -889,7 +889,7 @@ function populateEventColumn(selector, eventsArray, isLive = false, isPast = fal
                 <h4>${emptyMessage}</h4>
                 <p>We're working on exciting new events.<br>Subscribe to stay updated!</p>
                 <a href="#contact" class="event-btn">
-                    <i class="fas fa-bell"></i>
+                    <i id="sub-icon" class="fas fa-bell"></i>
                     ${actionText}
                 </a>
             </div>
