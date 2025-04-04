@@ -221,49 +221,49 @@ const websiteData = {
     // Courses data with enhanced information
     courses: [
         {
-            title: "Mobile App Development",
-            image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            title: "How to code like pro",
+            image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
             level: "Intermediate",
-            duration: "10 weeks",
-            description: "Learn to build native and cross-platform mobile applications for iOS and Android using React Native and Flutter.",
-            features: ["Expert Mentors", "Real-world Projects", "Job Assistance", "Lifetime Access"],
+            duration: "3 weeks",
+            description: "Learn to how to code like a pro using the C, Java, Python and JavaScript.",
+            features: ["Expert Mentors", "Real-world Projects", "Lifetime Access"],
             category: "development",
             isFeatured: true,
-            originalPrice: "$179.99",
-            price: "$89.99",
-            discount: 50,
+            originalPrice: "₹1599",
+            price: "₹999",
+            discount: 40,
             rating: 4.7,
-            students: 8765
+            students: 8
         },
         {
-            title: "Data Science Fundamentals",
-            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            title: "Git and Github",
+            image: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
             level: "Beginner",
-            duration: "8 weeks",
-            description: "Introduction to data analysis, visualization, and machine learning with Python, Pandas, and scikit-learn.",
-            features: ["Live Sessions", "Practical Exercises", "Career Guidance", "Industry Projects"],
+            duration: "2 weeks",
+            description: "Introduction to git the version control system and the Github",
+            features: ["Live Sessions", "Practical Exercises", "Industry Projects"],
             category: "data",
-            isFeatured: false,
-            originalPrice: "$149.99",
-            price: "$74.99",
-            discount: 50,
+            isFeatured: true,
+            originalPrice: "₹1499",
+            price: "₹899",
+            discount: 40,
             rating: 4.5,
-            students: 5432
+            students: 17
         },
         {
-            title: "Cloud Computing Essentials",
-            image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+            title: "Intermediate level in Python",
+            image: "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
             level: "Intermediate",
-            duration: "6 weeks",
-            description: "Master cloud infrastructure deployment and management using AWS, Azure, and GCP.",
+            duration: "8 weeks",
+            description: "Master Python for data science and Machine learning",
             features: ["Hands-on Labs", "Industry Experts", "Certification Prep", "Real-world Case Studies"],
             category: "infrastructure",
             isFeatured: false,
-            originalPrice: "$129.99",
-            price: "$69.99",
-            discount: 46,
+            originalPrice: "₹1999",
+            price: "₹1499",
+            discount: 25,
             rating: 4.6,
-            students: 3210
+            students: 23
         }
     ]
 };

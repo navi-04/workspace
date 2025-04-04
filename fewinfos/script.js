@@ -373,6 +373,9 @@ function animateCounters() {
 document.addEventListener('DOMContentLoaded', () => {
     createObserver();
     populateWebsiteData();
+    
+    // Initialize contact form functionality
+    initContactForm();
 });
 
 function populateWebsiteData() {
@@ -1130,3 +1133,135 @@ scrollToTopButton.addEventListener('click', (e) => {
         behavior: 'smooth'
     });
 });
+
+// Contact form functionality
+function initContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    const formSuccess = document.querySelector('.form-success');
+    const resetFormButton = document.querySelector('.reset-form');
+    
+    if (!contactForm) return;
+    
+    // Handle form submission
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form fields
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        // Validate form fields
+        if (!name || !email || !subject || !message) {
+            showToast('Please fill in all fields', 'error');
+            return;
+        }
+        
+        // Simple email validation
+        if (!validateEmail(email)) {
+            showToast('Please enter a valid email address', 'error');
+            return;
+        }
+        
+        // Simulate form submission (in real app, you'd send data to a server)
+        const submitBtn = contactForm.querySelector('.submit-btn');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnIcon = submitBtn.querySelector('i');
+        
+        // Show loading state
+        btnText.textContent = 'Sending...';
+        btnIcon.className = 'fas fa-spinner fa-spin';
+        submitBtn.disabled = true;
+        
+        // Simulate network request
+        setTimeout(() => {
+            // Reset button state
+            btnText.textContent = 'Send Message';
+            btnIcon.className = 'fas fa-paper-plane';
+            submitBtn.disabled = false;
+            
+            // Reset form
+            contactForm.reset();
+            
+            // Show success message
+            if (formSuccess) {
+                formSuccess.classList.add('active');
+            } else {
+                showToast('Message sent successfully!', 'success');
+            }
+        }, 1500);
+    });
+    
+    // Reset form button functionality
+    if (resetFormButton) {
+        resetFormButton.addEventListener('click', () => {
+            formSuccess.classList.remove('active');
+            contactForm.reset();
+        });
+    }
+}
+
+// Helper function to validate email
+function validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email.toLowerCase());
+}
+
+// Enhanced toast notification function to handle different types (success/error)
+function showToast(message, type = 'success') {
+    // Check if a toast container exists, if not create one
+    let toastContainer = document.querySelector('.toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.className = 'toast-container';
+        toastContainer.style.position = 'fixed';
+        toastContainer.style.bottom = '20px';
+        toastContainer.style.right = '20px';
+        toastContainer.style.zIndex = '9999';
+        document.body.appendChild(toastContainer);
+    }
+    
+    // Create and show toast
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    
+    // Set background color based on type
+    if (type === 'error') {
+        toast.style.background = 'rgba(220, 53, 69, 0.9)'; // Bootstrap danger color
+        toast.innerHTML = `<i class="fas fa-exclamation-circle"></i>${message}`;
+    } else {
+        toast.style.background = 'rgba(44, 95, 208, 0.9)'; // Default success color
+        toast.innerHTML = `<i class="fas fa-check-circle"></i>${message}`;
+    }
+    
+    // Common toast styles
+    toast.style.color = 'white';
+    toast.style.padding = '12px 20px';
+    toast.style.borderRadius = '8px';
+    toast.style.marginTop = '10px';
+    toast.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
+    toast.style.display = 'flex';
+    toast.style.alignItems = 'center';
+    toast.style.gap = '10px';
+    toast.style.transform = 'translateX(100%)';
+    toast.style.opacity = '0';
+    toast.style.transition = 'all 0.3s ease';
+    toast.style.backdropFilter = 'blur(4px)';
+    toast.style.minWidth = '250px';
+    
+    toastContainer.appendChild(toast);
+    
+    // Show the toast after a small delay
+    setTimeout(() => {
+        toast.style.transform = 'translateX(0)';
+        toast.style.opacity = '1';
+    }, 100);
+    
+    // Remove the toast after 3 seconds
+    setTimeout(() => {
+        toast.style.transform = 'translateX(100%)';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}

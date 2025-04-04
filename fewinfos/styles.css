@@ -3490,6 +3490,18 @@ body {
     box-shadow: 0 5px 15px rgba(44, 95, 208, 0.1);
 }
 
+/* Add styles for form validation visual feedback */
+.form-group input:focus:valid,
+.form-group textarea:focus:valid {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.form-group input:focus:invalid,
+.form-group textarea:focus:invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
 
 .form-icon {
     position: absolute;
@@ -3526,6 +3538,12 @@ body {
     width: 100%;
 }
 
+/* Add button loading state styles */
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
 .submit-btn:hover {
     background: var(--secondary);
     transform: translateY(-5px);
@@ -3552,8 +3570,9 @@ body {
     padding: 2rem;
     transform: translateY(100%);
     opacity: 0;
-    transition: all 0.5s ease;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     visibility: hidden;
+    z-index: 10;
 }
 
 .form-success.active {
