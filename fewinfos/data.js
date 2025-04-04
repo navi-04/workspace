@@ -19,8 +19,8 @@ const websiteData = {
             technologies: ["React", "Node.js", "Python"]
         },
         {
-            icon: "fas fa-mobile-alt",
-            title: "Mobile Apps",
+            icon: "fas fa-code",
+            title: "Minor projects",
             description: "Native and cross-platform mobile applications",
             technologies: ["Flutter", "React Native", "Swift"]
         },

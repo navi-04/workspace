@@ -2556,6 +2556,26 @@ body {
     padding: 1rem;
     transition: transform 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000);
     will-change: transform;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    overflow-y: hidden; /* Hide vertical scrolling in the container */
+    padding-bottom: 1rem; /* Add padding for scrollbar */
+    touch-action: pan-x; /* Allow vertical scroll on the page but handle horizontal in the container */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+}
+
+/* Hide scrollbar in WebKit browsers while still allowing scrolling */
+.team-members::-webkit-scrollbar {
+    display: none;
+}
+
+/* Make sure the member cards don't cause unexpected behavior */
+.member-card {
+    min-width: 280px;
+    max-width: 280px;
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    /* ...existing code... */
 }
 
 /* Remove transition during active dragging for better responsiveness */
