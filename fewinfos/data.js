@@ -16,45 +16,53 @@ const websiteData = {
             icon: "fas fa-desktop",
             title: "Web Development",
             description: "Custom web solutions with cutting-edge technologies",
-            technologies: ["React", "Node.js", "Python"]
+            technologies: ["React", "Node.js", "Python","HTML5","CSS3","Bootstrap"]
         },
         {
             icon: "fas fa-code",
-            title: "Minor projects",
-            description: "Native and cross-platform mobile applications",
-            technologies: ["Flutter", "React Native", "Swift"]
+            title: "Minor Projects",
+            description: "Web based minor project for students",
+            technologies: ["Python","HTML5","CSS3","Bootstrap","SQL"]
         },
         {
-            icon: "fas fa-cloud",
-            title: "Cloud Solutions",
-            description: "Scalable cloud infrastructure and services",
-            technologies: ["AWS", "Azure", "GCP"]
+            icon: "fab fa-instagram",
+            title: "Social Media Management",
+            description: "Standard post and reels per months",
+            technologies: ["Post per day", "Reel per week", "stories per day"]
         },
         {
-            icon: "fas fa-robot",
-            title: "AI Integration",
-            description: "Intelligent solutions powered by AI",
-            technologies: ["ML", "Deep Learning", "NLP"]
+            icon: "fas fa-book",
+            title: "One To One Mentorship",
+            description: "Ideal solutions by our mentors",
+            technologies: ["How to code", "How to use AI"]
         }
     ],
 
     // Projects/Products data
     projects: [
         {
-            title: "Smart Logger Pro",
-            description: "Advanced logging and monitoring solution for enterprise systems",
-            features: ["Real-time Monitoring", "AI Analytics", "Cloud Integration"],
+            title: "Seatify",
+            description: "Advanced hall arrangement solution for enterprise systems",
+            features: ["Real-time Monitoring", "AI Analytics", "Web-based"],
             icon: "fas fa-chart-line",
             github: "https://github.com/fewinfos/smart-logger",
             isFeatured: true
         },
         {
-            title: "SecureGate",
-            description: "Next-generation security management platform",
-            features: ["Advanced Encryption", "Threat Detection", "24/7 Protection"],
+            title: "FewAI CLI",
+            description: "Next-generation command line bot",
+            features: ["Advanced coding in terminal", "Automated works", "Integraion with the system"],
             icon: "fas fa-shield-alt",
             github: "https://github.com/fewinfos/securegate",
             isFeatured: false
+        },
+        {
+            title: "FewAI BOT",
+            description: "Next-generation LLM bot",
+            features: ["Coding master", "Real time problem solving"],
+            icon: "fas fa-robot",
+            github: "https://github.com/fewinfos/securegate",
+            isFeatured: true
         }
     ],
 
@@ -65,9 +73,9 @@ const websiteData = {
             position: "Founder & CEO",
             image: "images/naveenraj.jpg",
             socials: {
-                github: "#",
-                linkedin: "#",
-                instagram: "#"
+                github: "github.com/navi-04",
+                linkedin: "http://www.linkedin.com/in/navithiyagu",
+                instagram: "https://www.instagram.com/suvitha__ramesh?igsh=MW53a3B3NHQ2Yjd4Yg=="
             },
             goals: [
                 "To revolutionize digital solutions and empower businesses worldwide",
@@ -77,90 +85,90 @@ const websiteData = {
         members: [
             {
                 name: "Suvitha",
-                position: "Lead Developer",
+                position: "Co-founder & Lead Developer & Event Manager",
                 image: "images/suvitha.jpg",
                 socials: {
-                    github: "#",
+                    github: "github.com/navi-04",
                     linkedin: "#",
                     instagram: "#"
                 }
             },
             {
                 name: "Nureshma",
-                position: "UI/UX Designer",
+                position: "Techical Engineer & Clients Manager",
                 image: "images/nureshma.jpg",
                 socials: {
-                    github: "#",
+                    github: "github.com/navi-04",
                     linkedin: "#",
                     instagram: "#"
                 }
             },
             {
                 name: "Nirmala",
-                position: "Software Engineer",
+                position: "Socia Media Manager & Technical Engineer",
                 image: "images/nirmala.jpg",
                 socials: {
-                    github: "#",
+                    github: "github.com/navi-04",
                     linkedin: "#",
                     instagram: "#"
                 }
             },
             {
                 name: "Nishanthi",
-                position: "Backend Developer",
+                position: "Techical Engineer & Clients Manager",
                 image: "images/nishanthi.jpg",
                 socials: {
-                    github: "#",
+                    github: "github.com/navi-04",
                     linkedin: "#",
                     instagram: "#"
                 }
             },
             {
                 name: "Sudeep",
-                position: "DevOps Engineer",
+                position: "Techical Engineer & Clients Manager",
                 image: "images/sudeep.jpg",
                 socials: {
-                    github: "#",
+                    github: "github.com/navi-04",
                     linkedin: "#",
                     instagram: "#"
                 }
             },
             {
                 name: "Shivani",
-                position: "Frontend Developer",
+                position: "Socia Media Manager & Technical Engineer",
                 image: "images/shivani.jpg",
                 socials: {
-                    github: "#",
+                    github: "github.com/navi-04",
                     linkedin: "#",
                     instagram: "#"
                 }
             },
             {
                 name: "Ragavi",
-                position: "Frontend Developer",
+                position: "Event Manager & Technical Engineer",
                 image: "images/ragavi.jpg",
                 socials: {
-                    github: "#",
+                    github: "github.com/navi-04",
                     linkedin: "#",
                     instagram: "#"
                 }
             },
             {
                 name: "Sudharashanan",
-                position: "Backend Developer",
+                position: "Techical Engineer & Clients Manager",
                 image: "images/sudharashanan.jpg",
                 socials: {
-                    github: "#",
+                    github: "github.com/navi-04",
                     linkedin: "#",
                     instagram: "#"
                 }
             },
             {
                 name: "Swathi",
-                position: "Frontend Developer",
+                position: "Event Manager & Technical Engineer",
                 image: "images/swathi.jpg",
                 socials: {
-                    github: "#",
+                    github: "github.com/navi-04",
                     linkedin: "#",
                     instagram: "#"
                 }
@@ -267,5 +275,5 @@ function testEmptyEventColumns() {
     // websiteData.events.upcomingEvents = websiteData.events.upcomingEvents;
 }
 
-// Activate to test empty columns
-testEmptyEventColumns();
+// Comment out this line to show all events
+// testEmptyEventColumns();
