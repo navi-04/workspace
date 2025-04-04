@@ -759,12 +759,19 @@ body {
     z-index: 2;
     display: flex;
     align-items: center;
+    overflow: visible !important;
+    touch-action: pan-y !important; /* Ensure vertical scrolling works */
+    -webkit-overflow-scrolling: touch;
+    pointer-events: auto;
 }
 
 .services-container {
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+    overflow: visible !important;
+    touch-action: pan-y !important;
+    pointer-events: auto;
 }
 
 .services-grid {
@@ -1001,12 +1008,13 @@ body {
 
     .services-grid {
         display: flex;
-        overflow-x: scroll;
+        overflow-x: auto;
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
         padding: 2rem;
         gap: 1.5rem;
         margin: 0;
+        touch-action: pan-x !important; /* Only handle horizontal scrolling, not vertical */
     }
 
     .service-card {
@@ -1015,6 +1023,7 @@ body {
         margin-left: 2rem;
         scroll-snap-align: center;
         scroll-snap-stop: always;
+        touch-action: pan-x !important;
     }
 
     .service-nav {
@@ -2536,7 +2545,7 @@ body {
 .philosophy-item p {
     font-size: 1.1rem;
     line-height: 1.6;
-    color: var(--dark);
+    color: var (--dark);
 }
 
 .philosophy-item:hover {

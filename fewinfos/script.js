@@ -236,6 +236,63 @@ if (servicesGrid && window.innerWidth <= 768) {
         const walk = (x - startX) * 2;
         servicesGrid.scrollLeft = scrollLeft - walk;
     });
+
+    // Improved touch handling for services grid
+    servicesGrid.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        scrollLeft = servicesGrid.scrollLeft;
+        isDown = true;
+        isHorizontalScroll = null;
+        scrollDirectionDecided = false;
+    }, { passive: true });
+
+    servicesGrid.addEventListener('touchmove', e => {
+        if (!isDown) return;
+        
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
+        
+        // Calculate the horizontal and vertical distances
+        const diffX = Math.abs(startX - touchX);
+        const diffY = Math.abs(startY - touchY);
+        
+        // Only make a decision once per touch event to avoid flip-flopping
+        if (!scrollDirectionDecided) {
+            // Heavily favor vertical scrolling - only consider horizontal scrolling if
+            // horizontal movement is significantly greater than vertical
+            isHorizontalScroll = diffX > diffY * 2.5;
+            scrollDirectionDecided = true;
+            
+            if (isHorizontalScroll) {
+                servicesGrid.classList.add('dragging');
+            }
+        }
+        
+        // Only handle horizontal scrolling if we've determined it's horizontal
+        if (isHorizontalScroll) {
+            e.preventDefault();
+            const x = touchX - servicesGrid.offsetLeft;
+            const walk = (startX - touchX);
+            servicesGrid.scrollLeft = scrollLeft + walk;
+        }
+        // For vertical movement, let browser handle scrolling naturally
+        
+    }, { passive: false });
+
+    servicesGrid.addEventListener('touchend', () => {
+        isDown = false;
+        isHorizontalScroll = null;
+        scrollDirectionDecided = false;
+        servicesGrid.classList.remove('dragging');
+    }, { passive: true });
+
+    servicesGrid.addEventListener('touchcancel', () => {
+        isDown = false;
+        isHorizontalScroll = null;
+        scrollDirectionDecided = false;
+        servicesGrid.classList.remove('dragging');
+    }, { passive: true });
 }
 
 // Handle team members cards scrolling with mouse drag
