@@ -298,35 +298,43 @@ if (servicesGrid && window.innerWidth <= 768) {
         const walk = (x - startX) * 2;
         servicesGrid.scrollLeft = scrollLeft - walk;
     });
+}
 
-    const prevBtn = document.querySelector('.prev-service');
-    const nextBtn = document.querySelector('.next-service');
-    const cardWidth = servicesGrid.querySelector('.service-card').offsetWidth;
-    const scrollAmount = cardWidth + 24; // card width + gap
+// Handle team members cards scrolling with mouse drag
+const teamMembers = document.querySelector('.team-members');
+if (teamMembers && window.innerWidth <= 768) {
+    let startX;
+    let scrollLeft;
+    let isDown = false;
 
-    nextBtn.addEventListener('click', () => {
-        servicesGrid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    teamMembers.addEventListener('mousedown', e => {
+        isDown = true;
+        startX = e.pageX - teamMembers.offsetLeft;
+        scrollLeft = teamMembers.scrollLeft;
+        
+        // Change cursor to grabbing for visual feedback
+        teamMembers.style.cursor = 'grabbing';
+        teamMembers.classList.add('dragging');
     });
 
-    prevBtn.addEventListener('click', () => {
-        servicesGrid.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    teamMembers.addEventListener('mouseleave', () => {
+        isDown = false;
+        teamMembers.style.cursor = '';
+        teamMembers.classList.remove('dragging');
     });
 
-    // Touch handling
-    servicesGrid.addEventListener('touchstart', e => {
-        startX = e.touches[0].pageX - servicesGrid.offsetLeft;
-        scrollLeft = servicesGrid.scrollLeft;
-    }, { passive: true });
+    teamMembers.addEventListener('mouseup', () => {
+        isDown = false;
+        teamMembers.style.cursor = '';
+        teamMembers.classList.remove('dragging');
+    });
 
-    servicesGrid.addEventListener('touchmove', e => {
-        if (!startX) return;
-        const x = e.touches[0].pageX - servicesGrid.offsetLeft;
-        const walk = (startX - x) * 2;
-        servicesGrid.scrollLeft = scrollLeft + walk;
-    }, { passive: true });
-
-    servicesGrid.addEventListener('touchend', () => {
-        startX = null;
+    teamMembers.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - teamMembers.offsetLeft;
+        const walk = (x - startX) * 2;
+        teamMembers.scrollLeft = scrollLeft - walk;
     });
 }
 

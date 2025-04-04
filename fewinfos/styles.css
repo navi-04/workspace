@@ -3518,23 +3518,42 @@ body {
     
     .contact-info {
         padding: 2rem;
+        border-radius: 30px 30px 0 0;
     }
     
     .contact-form-container {
         padding: 2rem;
+        border-radius: 0 0 30px 30px;
     }
 }
 
 @media (max-width: 768px) {
+    .contact-section {
+        padding: 100px 1rem 80px;
+    }
+    
+    .contact-content {
+        margin-top: 2rem;
+        border-radius: 20px;
+    }
+    
+    .contact-info {
+        padding: 1.5rem;
+        border-radius: 20px 20px 0 0;
+        gap: 1.5rem;
+    }
+    
     .contact-card {
-        padding: 1.2rem;
-        gap: 1rem;
+        padding: 1rem;
+        gap: 0.8rem;
+        border-radius: 10px;
     }
     
     .contact-icon {
         width: 40px;
         height: 40px;
         font-size: 1.2rem;
+        flex-shrink: 0;
     }
     
     .contact-details h3 {
@@ -3542,39 +3561,121 @@ body {
     }
     
     .contact-details p {
-        font-size: 1rem;
+        font-size: 0.95rem;
+    }
+    
+    .social-container {
+        margin-top: 1rem;
+    }
+    
+    .social-container h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .social-icons {
+        flex-wrap: wrap;
+        gap: 0.8rem;
+        justify-content: center;
     }
     
     .social-icon {
-        width: 40px;
-        height: 40px;
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
     }
-}
-
-@media (max-width: 480px) {
+    
     .contact-form-container {
         padding: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 0.5rem;
     }
     
     .form-group input,
     .form-group textarea {
         padding: 0.8rem 0.8rem 0.8rem 2.5rem;
+        font-size: 0.95rem;
+        border-radius: 8px;
     }
     
     .form-icon {
         left: 0.8rem;
+        top: 0.8rem;
+        font-size: 1rem;
     }
     
     .submit-btn {
         padding: 0.8rem 1.5rem;
         font-size: 1rem;
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-section {
+        padding: 80px 0.8rem 60px;
+    }
+    
+    .contact-content {
+        margin-top: 1.5rem;
+        border-radius: 15px;
+    }
+    
+    .contact-info {
+        padding: 1.2rem;
+        border-radius: 15px 15px 0 0;
+        gap: 1rem;
+    }
+    
+    .contact-form-container {
+        padding: 1.2rem;
+    }
+    
+    .contact-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .contact-icon {
+        margin-bottom: 0.5rem;
+    }
+    
+    .contact-details h3 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+    
+    .form-group {
+        margin-bottom: 0.8rem;
+    }
+    
+    .form-submit {
+        margin-top: 0.5rem;
+    }
+    
+    .submit-btn {
+        padding: 0.7rem 1rem;
+        font-size: 0.95rem;
     }
     
     .form-success h3 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     
     .form-success p {
-        font-size: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .form-success .success-icon {
+        font-size: 3.5rem;
+    }
+    
+    .reset-form {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
     }
 }
