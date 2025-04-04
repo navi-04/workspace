@@ -194,68 +194,6 @@ elements.forEach(element => {
     });
 });
 
-// Chatbot functionality
-const chatToggle = document.querySelector('.chat-toggle');
-const chatbot = document.querySelector('.chatbot');
-const closeChat = document.querySelector('.close-chat');
-const sendMessage = document.querySelector('.send-message');
-const messageInput = document.querySelector('.chat-input input');
-const chatMessages = document.querySelector('.chat-messages');
-
-chatToggle.addEventListener('click', () => {
-    chatbot.classList.add('active');
-});
-
-closeChat.addEventListener('click', () => {
-    chatbot.classList.remove('active');
-});
-
-function addMessage(message, isUser = false) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-    messageDiv.innerHTML = `
-        <i class="fas fa-${isUser ? 'user' : 'robot'}"></i>
-        <p>${message}</p>
-    `;
-    chatMessages.appendChild(messageDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-sendMessage.addEventListener('click', sendUserMessage);
-messageInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') sendUserMessage();
-});
-
-function sendUserMessage() {
-    const message = messageInput.value.trim();
-    if (!message) return;
-    
-    addMessage(message, true);
-    messageInput.value = '';
-    
-    // Simulate bot response
-    setTimeout(() => {
-        addMessage('Thank you for your message. Our team will get back to you soon!');
-    }, 1000);
-}
-
-// Service contact buttons
-document.querySelectorAll('.contact-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        const serviceCard = e.target.closest('.service-card');
-        const serviceName = serviceCard.querySelector('h3').textContent;
-        addMessage(`I'm interested in your ${serviceName} service. Can you tell me more?`, true);
-        
-        // Show chatbot
-        chatbot.classList.add('active');
-        
-        // Simulate bot response after delay
-        setTimeout(() => {
-            addMessage(`Thank you for your interest in our ${serviceName} service. One of our specialists will contact you shortly.`);
-        }, 1000);
-    });
-});
-
 // Add smooth scroll functionality
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -491,10 +429,6 @@ function populateServices() {
             </div>
             <h3>${service.title}</h3>
             <p>${service.description}</p>
-            <button class="contact-btn">
-                <i class="fas fa-paper-plane"></i>
-                <span class="contact-text">Contact us</span>
-            </button>
             <div class="service-hover">
                 <div class="tech-tags">
                     ${service.technologies.map(tech => `<span>${tech}</span>`).join('')}
@@ -503,23 +437,6 @@ function populateServices() {
         `;
         
         servicesGrid.appendChild(serviceCard);
-    });
-    
-    // Reattach event listeners
-    document.querySelectorAll('.contact-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const serviceCard = e.target.closest('.service-card');
-            const serviceName = serviceCard.querySelector('h3').textContent;
-            addMessage(`I'm interested in your ${serviceName} service. Can you tell me more?`, true);
-            
-            // Show chatbot
-            chatbot.classList.add('active');
-            
-            // Simulate bot response after delay
-            setTimeout(() => {
-                addMessage(`Thank you for your interest in our ${serviceName} service. One of our specialists will contact you shortly.`);
-            }, 1000);
-        });
     });
 }
 
@@ -698,19 +615,8 @@ function populateCourses() {
             const courseName = courseCard.querySelector('h3').textContent;
             const coursePrice = courseCard.querySelector('.course-content > div:nth-child(3)').textContent.trim().split('\n')[1].trim();
             
-            // Show chatbot with course purchase inquiry
-            chatbot.classList.add('active');
-            addMessage(`I'd like to enroll in the "${courseName}" course for ${coursePrice}. How do I proceed with payment?`, true);
-            
-            // Simulate bot response
-            setTimeout(() => {
-                addMessage(`Great choice! To enroll in the "${courseName}" course, we'll need to set up your payment. Please click the link below to proceed to our secure payment gateway.`);
-                
-                // Add a follow-up message with a fake payment link
-                setTimeout(() => {
-                    addMessage(`<a href="#" class="payment-link" style="display: inline-block; padding: 0.8rem 1.5rem; background: var(--primary); color: white; text-decoration: none; border-radius: 10px; margin-top: 0.5rem;">Proceed to Payment</a>`);
-                }, 1000);
-            }, 1000);
+            // Show a toast notification instead
+            showToast(`You're interested in the "${courseName}" course for ${coursePrice}. Please contact us for enrollment details.`);
         });
     });
     
@@ -1203,3 +1109,24 @@ if (teamSlider && prevTeamBtn && nextTeamBtn) {
         }
     });
 }
+
+// Scroll to top button functionality
+const scrollToTopButton = document.getElementById('scroll-to-top');
+
+// Show button only when scrolled down
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        scrollToTopButton.classList.add('active');
+    } else {
+        scrollToTopButton.classList.remove('active');
+    }
+});
+
+// Scroll to top when clicked
+scrollToTopButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
