@@ -73,7 +73,7 @@ const websiteData = {
             position: "Founder & CEO",
             image: "images/naveenraj.jpg",
             socials: {
-                github: "github.com/navi-04",
+                github: "https://github.com/navi-04",
                 linkedin: "http://www.linkedin.com/in/navithiyagu",
                 instagram: "https://www.instagram.com/suvitha__ramesh?igsh=MW53a3B3NHQ2Yjd4Yg=="
             },
@@ -88,8 +88,8 @@ const websiteData = {
                 position: "Co-founder & Lead Developer & Event Manager",
                 image: "images/suvitha.jpg",
                 socials: {
-                    github: "github.com/navi-04",
-                    linkedin: "#",
+                    github: "https://github.com/navi-04",
+                    linkedin: "https://www.linkedin.com/in/suvitha-ramesh/",
                     instagram: "#"
                 }
             },
@@ -98,8 +98,8 @@ const websiteData = {
                 position: "Techical Engineer & Clients Manager",
                 image: "images/nureshma.jpg",
                 socials: {
-                    github: "github.com/navi-04",
-                    linkedin: "#",
+                    github: "https://github.com/navi-04",
+                    linkedin: "http://www.linkedin.com/in/nureshma-s-full-stack-developer-a03444290/",
                     instagram: "#"
                 }
             },
@@ -108,8 +108,8 @@ const websiteData = {
                 position: "Socia Media Manager & Technical Engineer",
                 image: "images/nirmala.jpg",
                 socials: {
-                    github: "github.com/navi-04",
-                    linkedin: "#",
+                    github: "https://github.com/navi-04",
+                    linkedin: "https://www.linkedin.com/in/nirmala-ramadas-16b081290?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
                     instagram: "#"
                 }
             },
@@ -118,18 +118,8 @@ const websiteData = {
                 position: "Techical Engineer & Clients Manager",
                 image: "images/nishanthi.jpg",
                 socials: {
-                    github: "github.com/navi-04",
-                    linkedin: "#",
-                    instagram: "#"
-                }
-            },
-            {
-                name: "Sudeep",
-                position: "Techical Engineer & Clients Manager",
-                image: "images/sudeep.jpg",
-                socials: {
-                    github: "github.com/navi-04",
-                    linkedin: "#",
+                    github: "https://github.com/navi-04",
+                    linkedin: "https://www.linkedin.com/in/nishanthi-shahana-b471b032b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
                     instagram: "#"
                 }
             },
@@ -138,8 +128,18 @@ const websiteData = {
                 position: "Socia Media Manager & Technical Engineer",
                 image: "images/shivani.jpg",
                 socials: {
-                    github: "github.com/navi-04",
-                    linkedin: "#",
+                    github: "https://github.com/navi-04",
+                    linkedin: "https://www.linkedin.com/in/shivani-karthikeyan-400508283?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+                    instagram: "#"
+                }
+            },
+            {
+                name: "Sudeep",
+                position: "Techical Engineer & Clients Manager",
+                image: "images/sudeep.jpg",
+                socials: {
+                    github: "https://github.com/navi-04",
+                    linkedin: "https://www.linkedin.com/in/sudeep-k-14b442290",
                     instagram: "#"
                 }
             },
@@ -148,8 +148,8 @@ const websiteData = {
                 position: "Event Manager & Technical Engineer",
                 image: "images/ragavi.jpg",
                 socials: {
-                    github: "github.com/navi-04",
-                    linkedin: "#",
+                    github: "https://github.com/navi-04",
+                    linkedin: "https://www.linkedin.com/in/ragavi-s-96848925a/",
                     instagram: "#"
                 }
             },
@@ -158,8 +158,8 @@ const websiteData = {
                 position: "Techical Engineer & Clients Manager",
                 image: "images/sudharashanan.jpg",
                 socials: {
-                    github: "github.com/navi-04",
-                    linkedin: "#",
+                    github: "https://github.com/navi-04",
+                    linkedin: "https://www.linkedin.com/in/sudharshanan-sathish-kumar-625776301/",
                     instagram: "#"
                 }
             },
@@ -168,8 +168,8 @@ const websiteData = {
                 position: "Event Manager & Technical Engineer",
                 image: "images/swathi.jpg",
                 socials: {
-                    github: "github.com/navi-04",
-                    linkedin: "#",
+                    github: "https://github.com/navi-04",
+                    linkedin: "https://www.linkedin.com/in/swathi-sundharaj-2a7242312",
                     instagram: "#"
                 }
             }
@@ -194,7 +194,7 @@ const websiteData = {
                 date: "Nov 15-17, 2025",
                 location: "MKCE - Karur, India",
                 description: "Explore the future of AI and machine learning with top experts and thought leaders.",
-                link: "#",
+                link: "#contact",
                 buttonText: "Register Now"
             }
         ],
