@@ -36,6 +36,12 @@ body {
     background: var(--bg-light-blue);
     color: var(--dark);
     overscroll-behavior-y: auto; /* Prevent scroll trapping on mobile */
+    touch-action: manipulation; /* Default touch action */
+}
+
+section {
+    touch-action: pan-y !important;
+    -webkit-overflow-scrolling: touch;
 }
 
 @keyframes float {
@@ -1023,7 +1029,7 @@ body {
         margin-left: 2rem;
         scroll-snap-align: center;
         scroll-snap-stop: always;
-        touch-action: pan-x !important;
+        touch-action: manipulation;
     }
 
     .service-nav {
@@ -1332,6 +1338,8 @@ body {
     transition: all 0.3s ease;
     z-index: 999;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    pointer-events: auto;
+    touch-action: manipulation;
 }
 
 .chat-toggle:hover {
@@ -2653,10 +2661,10 @@ body {
 
 .team-slider {
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* Changed from hidden to visible */
     padding: 2rem 0;
     margin: 0 -1rem; /* Negative margin to account for container padding */
-    touch-action: pan-x !important; /* Only handle horizontal scrolling, not vertical */
+    touch-action: pan-x pan-y !important; /* Allow both directions */
     -webkit-overflow-scrolling: touch;
     -webkit-user-select: none;
     user-select: none;
@@ -2671,32 +2679,21 @@ body {
     transition: transform 0.3s cubic-bezier(0.215, 0.610, 0.355, 1.000);
     will-change: transform;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: visible; /* Changed from hidden to visible */
     padding-bottom: 1rem;
-    touch-action: pan-x !important; /* Only handle horizontal scrolling, not vertical */
+    touch-action: pan-x pan-y !important; /* Allow both directions */
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
     pointer-events: auto;
 }
 
-/* Member cards should explicitly capture only horizontal touch */
 .member-card {
     min-width: 280px;
     max-width: 280px;
     flex-shrink: 0;
-    touch-action: pan-x !important; /* Only handle horizontal scrolling */
+    touch-action: manipulation !important; /* Use manipulation for better handling */
     pointer-events: auto;
-    /* ...existing code... */
-}
-
-/* Fix body and html touch behavior */
-html, body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    scroll-behavior: smooth;
-    overscroll-behavior-y: auto; /* Prevent scroll trapping on mobile */
-    touch-action: pan-y !important; /* Ensure vertical scrolling works site-wide */
 }
 
 .team-slider {
@@ -3748,6 +3745,8 @@ html, body {
     visibility: hidden;
     transition: all 0.3s ease;
     transform: translateY(20px);
+    pointer-events: auto;
+    touch-action: manipulation;
 }
 
 #scroll-to-top.active {
