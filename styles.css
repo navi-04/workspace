@@ -1,4 +1,4 @@
-:root {
+/* :root {
     --primary: #003366;
     --secondary: #2c5fd0;
     --dark: #1a1a1a;
@@ -8,7 +8,7 @@
     --nav-gradient-start: rgba(44, 95, 208, 0.35);
     --nav-gradient-end: rgba(74, 144, 226, 0.45);
     --bg-light-blue: #f0f5ff;
-}
+} */
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 ::-webkit-scrollbar {
