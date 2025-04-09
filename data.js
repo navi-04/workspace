@@ -58,7 +58,7 @@ const websiteData = {
         {
             title: "FewAI CLI",
             description: "Next-generation command line bot",
-            features: ["Advanced coding in terminal", "Automated works", "Integraion with the system"],
+            features: ["Advanced coding in terminal", "Automated works", "Integration with the system"],
             icon: "fas fa-shield-alt",
             github: "https://github.com/fewinfos/securegate",
             isFeatured: false
@@ -102,7 +102,7 @@ const websiteData = {
             },
             {
                 name: "Nureshma",
-                position: "Techical Engineer & Clients Manager",
+                position: "Technical Engineer & Clients Manager",
                 image: "images/nureshma.jpg",
                 socials: {
                     github: "https://github.com/navi-04",
@@ -112,7 +112,7 @@ const websiteData = {
             },
             {
                 name: "Nirmala",
-                position: "Socia Media Manager & Technical Engineer",
+                position: "Social Media Manager & Technical Engineer",
                 image: "images/nirmala.jpg",
                 socials: {
                     github: "https://github.com/navi-04",
@@ -122,7 +122,7 @@ const websiteData = {
             },
             {
                 name: "Nishanthi",
-                position: "Techical Engineer & Clients Manager",
+                position: "Technical Engineer & Clients Manager",
                 image: "images/nishanthi.jpg",
                 socials: {
                     github: "https://github.com/navi-04",
@@ -132,7 +132,7 @@ const websiteData = {
             },
             {
                 name: "Shivani",
-                position: "Socia Media Manager & Technical Engineer",
+                position: "Social Media Manager & Technical Engineer",
                 image: "images/shivani.jpg",
                 socials: {
                     github: "https://github.com/navi-04",
@@ -142,7 +142,7 @@ const websiteData = {
             },
             {
                 name: "Sudeep",
-                position: "Techical Engineer & Clients Manager",
+                position: "Technical Engineer & Clients Manager",
                 image: "images/sudeep.jpg",
                 socials: {
                     github: "https://github.com/navi-04",
@@ -162,7 +162,7 @@ const websiteData = {
             },
             {
                 name: "Sudharashanan",
-                position: "Techical Engineer & Clients Manager",
+                position: "Technical Engineer & Clients Manager",
                 image: "images/sudharashanan.jpg",
                 socials: {
                     github: "https://github.com/navi-04",
@@ -198,9 +198,9 @@ const websiteData = {
         upcomingEvents: [
             {
                 title: "AI Innovation Summit",
-                date: "Nov 15-17, 2025",
+                date: "April 15-17, 2025",
                 location: "MKCE - Karur, India",
-                description: "Explore the future of AI and machine learning with top experts and thought leaders.",
+                description: "Explore the future of AI and machine learning with top experts and leaders.",
                 link: "#contact",
                 buttonText: "Register Now"
             }
@@ -233,7 +233,7 @@ const websiteData = {
             price: "₹999",
             discount: 40,
             rating: 4.7,
-            students: 8
+            students: 28
         },
         {
             title: "Git and Github",
@@ -248,7 +248,7 @@ const websiteData = {
             price: "₹899",
             discount: 40,
             rating: 4.5,
-            students: 17
+            students: 27
         },
         {
             title: "Intermediate level in Python",
@@ -256,14 +256,14 @@ const websiteData = {
             level: "Intermediate",
             duration: "8 weeks",
             description: "Master Python for data science and Machine learning",
-            features: ["Hands-on Labs", "Industry Experts", "Certification Prep", "Real-world Case Studies"],
+            features: ["Hands-on Labs", "Industry Experts", "Certification Course", "Real-world Case Studies"],
             category: "infrastructure",
             isFeatured: false,
             originalPrice: "₹1999",
             price: "₹1499",
             discount: 25,
             rating: 4.6,
-            students: 23
+            students: 13
         }
     ]
 };
