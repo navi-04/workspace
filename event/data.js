@@ -1,3 +1,5 @@
+const sitePasscode = "event123"; // This is the passcode to unlock the content
+
 const eventData = [
   {
     level: 1.1,

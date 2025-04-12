@@ -2,6 +2,54 @@ document.addEventListener('DOMContentLoaded', function() {
     const eventContainer = document.getElementById('event-boxes');
     const levelSearch = document.getElementById('level-search');
     const searchBtn = document.getElementById('search-btn');
+    const passwordOverlay = document.getElementById('password-overlay');
+    const passwordInput = document.getElementById('password-input');
+    const submitPassword = document.getElementById('submit-password');
+    const passwordError = document.getElementById('password-error');
+    const mainContent = document.getElementById('main-content');
+    const searchContainer = document.querySelector('.search-container');
+    
+    // Password verification logic
+    submitPassword.addEventListener('click', checkPassword);
+    passwordInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkPassword();
+        }
+    });
+    
+    // Focus on password input when page loads
+    passwordInput.focus();
+    
+    function checkPassword() {
+        const enteredPassword = passwordInput.value.trim();
+        
+        if (enteredPassword === sitePasscode) {
+            // Correct password - show content
+            passwordOverlay.classList.add('hidden');
+            
+            // Remove blur from content with slight delay for smooth transition
+            setTimeout(() => {
+                mainContent.classList.remove('blurred');
+                searchContainer.classList.remove('blurred');
+                
+                // Remove overlay completely after transition
+                setTimeout(() => {
+                    passwordOverlay.style.display = 'none';
+                }, 500);
+            }, 300);
+            
+        } else {
+            // Incorrect password
+            passwordError.textContent = "Incorrect passcode. Please try again.";
+            passwordInput.value = "";
+            
+            // Shake effect for error
+            passwordInput.classList.add('shake');
+            setTimeout(() => {
+                passwordInput.classList.remove('shake');
+            }, 500);
+        }
+    }
     
     // Render event boxes
     eventData.forEach((event, index) => {
@@ -104,6 +152,40 @@ document.addEventListener('DOMContentLoaded', function() {
         
         content.appendChild(promptBox);
         box.appendChild(content);
+        
+        // Add steps if they exist
+        if (event.steps && event.steps.length > 0) {
+            const stepsContainer = document.createElement('div');
+            stepsContainer.className = 'steps-container';
+            
+            const stepsTitle = document.createElement('h3');
+            stepsTitle.className = 'steps-title';
+            stepsTitle.textContent = 'Steps to Complete';
+            stepsContainer.appendChild(stepsTitle);
+            
+            const stepsList = document.createElement('ol');
+            stepsList.className = 'steps-list';
+            
+            event.steps.forEach(step => {
+                const stepItem = document.createElement('li');
+                stepItem.className = 'step-item';
+                
+                const stepTitle = document.createElement('div');
+                stepTitle.className = 'step-title';
+                stepTitle.textContent = step.title;
+                stepItem.appendChild(stepTitle);
+                
+                const stepDescription = document.createElement('div');
+                stepDescription.className = 'step-description';
+                stepDescription.textContent = step.description;
+                stepItem.appendChild(stepDescription);
+                
+                stepsList.appendChild(stepItem);
+            });
+            
+            stepsContainer.appendChild(stepsList);
+            content.appendChild(stepsContainer);
+        }
         
         return box;
     }
