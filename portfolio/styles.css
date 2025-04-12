@@ -1,0 +1,512 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0a0a1a;
+    color: #fff;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Night Sky and Nebula Effects */
+.night-sky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.nebula {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(41, 22, 84, 0.5) 0%, rgba(0, 0, 0, 0) 25%),
+        radial-gradient(circle at 80% 20%, rgba(41, 74, 131, 0.5) 0%, rgba(0, 0, 0, 0) 25%),
+        radial-gradient(circle at 40% 70%, rgba(69, 28, 118, 0.5) 0%, rgba(0, 0, 0, 0) 30%),
+        radial-gradient(circle at 70% 90%, rgba(28, 58, 118, 0.5) 0%, rgba(0, 0, 0, 0) 20%);
+    opacity: 0.7;
+    filter: blur(8px);
+}
+
+/* Star styles */
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    filter: blur(0.5px);
+    animation: fall linear;
+    opacity: 0;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) translateX(20px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(calc(100vh + 100px)) translateX(-20px);
+        opacity: 0;
+    }
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Background stars that twinkle */
+.star.background {
+    animation: twinkle ease-in-out infinite;
+}
+
+/* Navbar styles - Floating design with box links */
+.navbar {
+    background: rgba(13, 17, 38, 0.5);
+    backdrop-filter: blur(15px);
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+    height: 75px;
+    z-index: 999;
+    border-radius: 20px;
+    border: 1px solid rgba(123, 147, 255, 0.3);
+    box-shadow: 
+        0 10px 25px rgba(17, 22, 71, 0.3),
+        0 5px 15px rgba(64, 47, 128, 0.15),
+        0 0 30px rgba(88, 103, 221, 0.1);
+    transition: all 0.4s ease;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0px);
+    }
+    50% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 95%;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative; /* Add this for absolute positioning of globe */
+}
+
+/* Replace the existing Earth Globe styles with this improved 3D version */
+.earth-globe-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    z-index: 2;
+    perspective: 800px;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.earth-globe {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: none;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: earth-rotate 20s linear infinite;
+}
+
+.earth-globe .sphere {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 30px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(65, 152, 255, 0.6);
+    background-size: cover;
+    backface-visibility: hidden;
+}
+
+.earth-globe .front {
+    background-image: url('https://i.imgur.com/oxsz9jR.jpg');
+    transform: translateZ(30px) rotateY(180deg);
+}
+
+.earth-globe .back {
+    background-image: url('https://i.imgur.com/oxsz9jR.jpg');
+    background-position: 100% 0;
+    transform: translateZ(-30px) rotateY(0deg);
+}
+
+.earth-glow {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(65, 152, 255, 0.3) 0%,
+        rgba(65, 152, 255, 0.2) 20%,
+        rgba(65, 152, 255, 0) 70%
+    );
+    z-index: -1;
+    filter: blur(15px);
+    animation: glow-pulse 4s ease-in-out infinite;
+}
+
+.earth-ring {
+    position: absolute;
+    width: 140%;
+    height: 20%;
+    left: -20%;
+    top: 40%;
+    border-radius: 50%;
+    border: 2px solid rgba(65, 152, 255, 0.2);
+    transform: rotateX(75deg);
+    box-shadow: 0 0 20px rgba(65, 152, 255, 0.3);
+    z-index: -1;
+}
+
+@keyframes earth-rotate {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+@keyframes glow-pulse {
+    0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.earth-globe-container:hover .earth-globe {
+    animation-play-state: paused;
+}
+
+.earth-globe-container:hover .earth-glow {
+    background: radial-gradient(
+        circle,
+        rgba(65, 152, 255, 0.5) 0%,
+        rgba(65, 152, 255, 0.3) 30%,
+        rgba(65, 152, 255, 0) 70%
+    );
+    animation-play-state: paused;
+}
+
+.navbar-logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: relative;
+    background: linear-gradient(135deg, #2c3e7a 0%, #4657a9 50%, #3a4a90 100%);
+    padding: 8px 20px;
+    border-radius: 15px;
+    box-shadow: 
+        0 5px 15px rgba(66, 103, 178, 0.3),
+        inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    animation: logoPulse 5s ease-in-out infinite;
+    margin-right: 0; /* Push logo to the left */
+    z-index: 10; /* Ensure logo stays above other elements */
+}
+
+@keyframes logoPulse {
+    0%, 100% {
+        box-shadow: 
+            0 5px 15px rgba(66, 103, 178, 0.3),
+            inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    }
+    50% {
+        box-shadow: 
+            0 5px 20px rgba(66, 103, 178, 0.5),
+            0 0 30px rgba(88, 166, 255, 0.3),
+            inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    }
+}
+
+.navbar-logo a {
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.5px;
+    background: linear-gradient(to right, #fff, #a9c2ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.navbar-logo a:hover {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Updated navbar menu with spaced boxes */
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 15px;
+    height: 100%;
+    padding: 0 5px;
+    margin-left: 0; /* Push menu to the right */
+    z-index: 10; /* Ensure menu stays above other elements */
+}
+
+.navbar-item {
+    height: 45px;
+    position: relative;
+    margin: 0;
+}
+
+/* Cool box style for nav links */
+.navbar-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    height: 100%;
+    padding: 0 20px;
+    color: #e6e6ff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    background: rgba(59, 89, 219, 0.1);
+    border: 1px solid rgba(123, 147, 255, 0.2);
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    transform: translateY(0);
+    animation: navItemFloat 3s ease-in-out infinite;
+    animation-delay: calc(var(--item-index, 0) * 0.2s);
+}
+
+.navbar-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes navItemFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.navbar-link:hover {
+    color: #ffffff;
+    transform: translateY(-3px);
+    box-shadow: 
+        0 7px 14px rgba(59, 89, 219, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(123, 147, 255, 0.4);
+    background: rgba(59, 89, 219, 0.2);
+}
+
+.navbar-link:hover::before {
+    opacity: 1;
+}
+
+.navbar-link .nav-icon {
+    margin-right: 8px;
+    transition: transform 0.3s ease;
+    font-size: 1.1rem;
+    color: #a9c2ff;
+}
+
+.navbar-link:hover .nav-icon {
+    transform: translateY(-3px) scale(1.2);
+    color: #7fc8ff;
+    text-shadow: 0 0 10px rgba(127, 200, 255, 0.5);
+}
+
+.navbar-link.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, rgba(64, 124, 247, 0.25) 0%, rgba(59, 89, 219, 0.15) 100%);
+    box-shadow: 
+        0 5px 12px rgba(59, 89, 219, 0.25),
+        0 0 15px rgba(88, 166, 255, 0.1),
+        inset 0 0 0 1px rgba(123, 147, 255, 0.4);
+    border: 1px solid rgba(123, 147, 255, 0.5);
+    transform: translateY(-3px);
+}
+
+.navbar-link.active .nav-icon {
+    color: #7fc8ff;
+    text-shadow: 0 0 10px rgba(127, 200, 255, 0.5);
+}
+
+/* Custom animations */
+@keyframes glow {
+    0% { text-shadow: 0 0 5px rgba(88, 166, 255, 0.3); }
+    50% { text-shadow: 0 0 15px rgba(88, 166, 255, 0.6); }
+    100% { text-shadow: 0 0 5px rgba(88, 166, 255, 0.3); }
+}
+
+.navbar-toggle {
+    display: none;
+    cursor: pointer;
+    background: rgba(73, 90, 197, 0.2);
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(123, 147, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: #e6e6ff;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .navbar {
+        top: 10px;
+        height: 65px;
+        animation: none;
+    }
+    
+    .navbar-toggle {
+        display: block;
+    }
+    
+    .navbar-menu {
+        position: fixed;
+        left: -100%;
+        top: 85px;
+        flex-direction: column;
+        background: rgba(13, 17, 38, 0.85);
+        backdrop-filter: blur(12px);
+        width: 90%;
+        max-width: 400px;
+        border-radius: 15px;
+        margin-left: 5%;
+        text-align: center;
+        transition: 0.3s;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(123, 147, 255, 0.3);
+        gap: 10px;
+        padding: 15px;
+    }
+    
+    .navbar-menu.active {
+        left: 0;
+    }
+    
+    .navbar-item {
+        height: 50px;
+        width: 100%;
+    }
+    
+    .navbar-link {
+        width: 100%;
+        border-radius: 10px;
+        justify-content: center;
+        animation: none;
+    }
+    
+    .navbar-link.active {
+        background: linear-gradient(90deg, rgba(64, 124, 247, 0.25), rgba(59, 89, 219, 0.15));
+    }
+    
+    .navbar-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .navbar-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .navbar-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .earth-globe-container {
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    .earth-globe .sphere {
+        box-shadow: 
+            inset 0 0 20px rgba(0, 0, 0, 0.8),
+            0 0 15px rgba(65, 152, 255, 0.5);
+    }
+    
+    .earth-globe .front {
+        transform: translateZ(20px) rotateY(180deg);
+    }
+    
+    .earth-globe .back {
+        transform: translateZ(-20px) rotateY(0deg);
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .navbar-logo {
+        margin-right: 30px;
+    }
+    
+    .navbar-menu {
+        margin-left: 30px;
+    }
+}
+
+/* Add visual feedback when hovering over the globe */
+.earth-globe-container:hover .earth-globe {
+    animation-play-state: paused;
+    box-shadow: 
+        inset 5px -5px 25px rgba(0, 0, 0, 0.4),
+        0 0 30px rgba(88, 166, 255, 0.9),
+        inset 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+.earth-globe-container:hover .earth-glow {
+    background: radial-gradient(circle, rgba(88, 166, 255, 0.5) 0%, rgba(88, 166, 255, 0) 70%);
+}
