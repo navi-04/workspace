@@ -94,9 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             foundCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
             
             // Highlight the card
-            setTimeout(() => {
-                foundCard.classList.add('highlight-card');
-            }, 500);
+           
         } else {
             alert(`No event found with level ${searchValue}`);
         }
@@ -104,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function createEventBox(event, index) {
         const box = document.createElement('div');
-        box.className = 'event-box';
+        box.className = `event-box event-type-${event.type}`;
         box.style.animationDelay = `${index * 0.15}s`;
         
         // Level badge
@@ -117,17 +115,38 @@ document.addEventListener('DOMContentLoaded', function() {
         const content = document.createElement('div');
         content.className = 'event-content';
         
+        // Create box based on type
+        switch(event.type) {
+            case 1:
+                createTypeOneBox(event, content);
+                break;
+            case 2:
+                createTypeTwoBox(event, content);
+                break;
+            case 3:
+                createTypeThreeBox(event, content);
+                break;
+            default:
+                createTypeOneBox(event, content); // Default to type 1
+        }
+        
+        box.appendChild(content);
+        return box;
+    }
+    
+    // Type 1: Full box with topic, description, link, prompt
+    function createTypeOneBox(event, container) {
         // Topic
         const topic = document.createElement('h2');
         topic.className = 'event-topic';
         topic.textContent = event.topic;
-        content.appendChild(topic);
+        container.appendChild(topic);
         
         // Description
         const description = document.createElement('p');
         description.className = 'event-description';
         description.textContent = event.description;
-        content.appendChild(description);
+        container.appendChild(description);
         
         // Link
         const link = document.createElement('a');
@@ -135,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
         link.href = event.link;
         link.textContent = 'Link';
         link.target = '_blank';
-        content.appendChild(link);
+        container.appendChild(link);
         
         // Prompt box
         const promptBox = document.createElement('div');
@@ -150,43 +169,87 @@ document.addEventListener('DOMContentLoaded', function() {
         promptText.textContent = event.prompt;
         promptBox.appendChild(promptText);
         
-        content.appendChild(promptBox);
-        box.appendChild(content);
+        container.appendChild(promptBox);
         
         // Add steps if they exist
         if (event.steps && event.steps.length > 0) {
-            const stepsContainer = document.createElement('div');
-            stepsContainer.className = 'steps-container';
-            
-            const stepsTitle = document.createElement('h3');
-            stepsTitle.className = 'steps-title';
-            stepsTitle.textContent = 'Steps to Complete';
-            stepsContainer.appendChild(stepsTitle);
-            
-            const stepsList = document.createElement('ol');
-            stepsList.className = 'steps-list';
-            
-            event.steps.forEach(step => {
-                const stepItem = document.createElement('li');
-                stepItem.className = 'step-item';
-                
-                const stepTitle = document.createElement('div');
-                stepTitle.className = 'step-title';
-                stepTitle.textContent = step.title;
-                stepItem.appendChild(stepTitle);
-                
-                const stepDescription = document.createElement('div');
-                stepDescription.className = 'step-description';
-                stepDescription.textContent = step.description;
-                stepItem.appendChild(stepDescription);
-                
-                stepsList.appendChild(stepItem);
-            });
-            
-            stepsContainer.appendChild(stepsList);
-            content.appendChild(stepsContainer);
+            addStepsToContainer(event.steps, container);
         }
+    }
+    
+    // Type 2: Simple box with heading and text only
+    function createTypeTwoBox(event, container) {
+        // Topic/Heading
+        const topic = document.createElement('h2');
+        topic.className = 'event-topic';
+        topic.textContent = event.topic;
+        container.appendChild(topic);
         
-        return box;
+        // Content
+        const contentText = document.createElement('p');
+        contentText.className = 'event-text';
+        contentText.textContent = event.content;
+        container.appendChild(contentText);
+    }
+    
+    // Type 3: Box with heading, image and text
+    function createTypeThreeBox(event, container) {
+        // Topic/Heading
+        const topic = document.createElement('h2');
+        topic.className = 'event-topic';
+        topic.textContent = event.topic;
+        container.appendChild(topic);
+        
+        // Image
+        const imageContainer = document.createElement('div');
+        imageContainer.className = 'event-image-container';
+        
+        const image = document.createElement('img');
+        image.className = 'event-image';
+        image.src = event.imageUrl;
+        image.alt = event.topic;
+        imageContainer.appendChild(image);
+        
+        container.appendChild(imageContainer);
+        
+        // Content
+        const contentText = document.createElement('p');
+        contentText.className = 'event-text';
+        contentText.textContent = event.content;
+        container.appendChild(contentText);
+    }
+    
+    // Helper function to add steps
+    function addStepsToContainer(steps, container) {
+        const stepsContainer = document.createElement('div');
+        stepsContainer.className = 'steps-container';
+        
+        const stepsTitle = document.createElement('h3');
+        stepsTitle.className = 'steps-title';
+        stepsTitle.textContent = 'Steps to Complete';
+        stepsContainer.appendChild(stepsTitle);
+        
+        const stepsList = document.createElement('ol');
+        stepsList.className = 'steps-list';
+        
+        steps.forEach(step => {
+            const stepItem = document.createElement('li');
+            stepItem.className = 'step-item';
+            
+            const stepTitle = document.createElement('div');
+            stepTitle.className = 'step-title';
+            stepTitle.textContent = step.title;
+            stepItem.appendChild(stepTitle);
+            
+            const stepDescription = document.createElement('div');
+            stepDescription.className = 'step-description';
+            stepDescription.textContent = step.description;
+            stepItem.appendChild(stepDescription);
+            
+            stepsList.appendChild(stepItem);
+        });
+        
+        stepsContainer.appendChild(stepsList);
+        container.appendChild(stepsContainer);
     }
 });
