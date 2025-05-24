@@ -7,7 +7,7 @@ const websiteData = {
         services: ["web design", "app development", "digital marketing", "AI solutions", "mentorship", "coding"],
         technologies: ["React", "Node.js", "Python", "HTML5", "CSS3", "Bootstrap", "SQL"]
     },
-    
+     
     // Counters data
     counters: {
         yearsOfExperience: 2,
